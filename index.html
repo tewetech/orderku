@@ -1,234 +1,548 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order-Ku | Tewe Tech</title>
-<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/tewetech/favicon/refs/heads/main/tewe.png">
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(180deg, #ffffff 0%, #29b6d3 100%);
-    background-attachment: fixed;
-}
-::-webkit-scrollbar {
-    width: 4px;
-}
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-::-webkit-scrollbar-thumb {
-    background: rgba(21, 94, 117, 0.2);
-    border-radius: 10px;
-}
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-.shimmer-box {
-    position: relative;
-    overflow: hidden;
-}
-.shimmer-box::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-    animation: shimmer 3s infinite;
-    pointer-events: none;
-    z-index: 10;
-}
-.glass-panel {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type=number] {
-    -moz-appearance: textfield;
-}
-.loader {
-    width: 40px;
-    padding: 6px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: #155e75;
-    --_m: conic-gradient(#0000 10%,#000), linear-gradient(#000 0 0) content-box;
-    -webkit-mask: var(--_m);
-    mask: var(--_m);
-    -webkit-mask-composite: source-out;
-    mask-composite: subtract;
-    animation: l3 1s infinite linear;
-    margin: 0 auto;
-}
-.loader-btn {
-    width: 16px;
-    padding: 2px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: #ffffff;
-    --_m: conic-gradient(#0000 10%,#000), linear-gradient(#000 0 0) content-box;
-    -webkit-mask: var(--_m);
-    mask: var(--_m);
-    -webkit-mask-composite: source-out;
-    mask-composite: subtract;
-    animation: l3 1s infinite linear;
-    margin: 0 auto;
-}
-@keyframes l3 {to{transform: rotate(1turn)}}
-</style>
-</head>
-<body class="min-h-screen flex items-center justify-center p-4">
-    <div class="w-full max-w-[360px] bg-[#f4fbff] rounded-[45px] border-[12px] border-[#155e75] shadow-2xl relative overflow-hidden flex flex-col pb-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Order-Ku | Tewe Tech</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/tewetech/favicon/refs/heads/main/tewe.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Quicksand:wght@500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        neu: {
+                            bg: '#e0e5ec',
+                            primary: '#079790',
+                            text: '#2d3748',
+                            light: '#4a5568'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #e0e5ec;
+            color: #2d3748;
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a3b1c6;
+            border-radius: 10px;
+        }
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #a3b1c6 transparent;
+        }
         
-        <div class="absolute -top-10 -right-10 w-64 h-64 bg-gradient-to-br from-[#38bdf8] to-[#0369a1] rounded-full blur-3xl opacity-30"></div>
-        <div class="absolute top-40 -left-20 w-72 h-72 bg-[#7dd3fc] rounded-full blur-3xl opacity-40"></div>
-        <div class="absolute -bottom-20 right-0 w-80 h-80 bg-[#bae6fd] rounded-full blur-3xl opacity-50"></div>
+        .neu-bg {
+            background-color: #e0e5ec;
+        }
+        
+        .neu-flat {
+            background: #e0e5ec;
+            box-shadow: 9px 9px 20px #b8c5d6, -9px -9px 20px rgba(255, 255, 255, 0.9);
+            border: none !important;
+        }
+        
+        .neu-pressed {
+            background: #e0e5ec;
+            box-shadow: inset 6px 6px 14px #b8c5d6, inset -6px -6px 14px rgba(255, 255, 255, 0.9);
+            border: none !important;
+        }
+        
+        .neu-btn {
+            background: #e0e5ec;
+            box-shadow: 6px 6px 14px #b8c5d6, -6px -6px 14px rgba(255, 255, 255, 0.9);
+            border: none !important;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .neu-btn:active, .active-tab {
+            box-shadow: inset 4px 4px 8px #b8c5d6, inset -4px -4px 8px rgba(255, 255, 255, 0.9) !important;
+            color: #079790 !important;
+        }
 
-        <div class="absolute top-0 inset-x-0 h-6 flex justify-center mt-2 z-20">
-            <div class="w-24 h-5 bg-[#155e75] rounded-b-xl"></div>
+        .neu-text {
+            text-shadow: 1px 1px 1px #ffffff, -1px -1px 1px #b8c5d6;
+        }
+
+        input, textarea { 
+            background-color: #e0e5ec !important;
+            box-shadow: inset 5px 5px 12px #b8c5d6, inset -5px -5px 12px rgba(255, 255, 255, 0.9) !important;
+            border: none !important; 
+            border-radius: 9999px !important;
+            font-family: 'Quicksand', sans-serif !important;
+            font-weight: 600 !important;
+            color: #2d3748 !important;
+            transition: all 0.2s ease;
+        }
+        
+        input:focus, textarea:focus {
+            box-shadow: inset 7px 7px 16px #a8b5c6, inset -7px -7px 16px rgba(255, 255, 255, 1) !important;
+            outline: none;
+        }
+
+        .scroll-fade {
+            mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+        
+        #toast-container { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        
+        @keyframes shimmer-bg {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .btn-processing {
+            position: relative;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+        .btn-processing::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+            animation: shimmer-btn 1s infinite linear;
+            z-index: 10;
+        }
+        @keyframes shimmer-btn {
+            100% { left: 200%; }
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row h-[100dvh] w-screen overflow-hidden neu-bg">
+    
+    <header class="w-full h-[65px] neu-bg shrink-0 flex flex-col md:hidden items-center justify-center z-40 relative neu-flat rounded-b-2xl">
+        <h1 class="text-[12px] font-heading font-black tracking-tight text-[#2d3748] mb-1.5">ORDER <span class="text-[#079790]">-KU</span></h1>
+        <p class="neu-pressed text-[#079790] text-[8px] font-bold px-3 py-1 rounded-full">Version 3.5.0 ID</p>
+    </header>
+
+    <aside class="hidden md:flex w-52 lg:w-64 h-full neu-bg shrink-0 flex-col z-40 relative neu-flat">
+        <div class="flex flex-col items-center justify-center mt-10 mb-8">
+            <h1 class="text-[14px] md:text-[20px] font-heading font-black tracking-tight text-[#2d3748]">ORDER-<span class="text-[#079790]">KU</span></h1>
+            <p class="neu-pressed text-[#079790] text-[9px] md:text-[10px] font-bold px-4 py-1.5 mt-3 rounded-full">Version 3.5.0 ID</p>
         </div>
+        <nav class="flex flex-col gap-4 px-5 w-full mt-2">
+            <button onclick="switchTab('input')" class="tab-btn btn-tab-input neu-btn flex items-center py-3.5 px-5 rounded-2xl text-[11px] md:text-[14px] font-bold tracking-wide active-tab transition-all gap-4 w-full text-[#4a5568]">
+                <i class="fas fa-edit w-5 text-center md:text-[16px]"></i> <span>Input</span>
+            </button>
+            <button onclick="switchTab('list')" class="tab-btn btn-tab-list neu-btn flex items-center py-3.5 px-5 rounded-2xl text-[11px] md:text-[14px] font-bold tracking-wide text-[#4a5568] transition-all gap-4 w-full">
+                <i class="fas fa-list w-5 text-center md:text-[16px]"></i> <span>Order</span>
+            </button>
+            <button onclick="switchTab('rekap')" class="tab-btn btn-tab-rekap neu-btn flex items-center py-3.5 px-5 rounded-2xl text-[11px] md:text-[14px] font-bold tracking-wide text-[#4a5568] transition-all gap-4 w-full">
+                <i class="fas fa-chart-pie w-5 text-center md:text-[16px]"></i> <span>Rekap</span>
+            </button>
+            <button onclick="switchTab('barang')" class="tab-btn btn-tab-barang neu-btn flex items-center py-3.5 px-5 rounded-2xl text-[11px] md:text-[14px] font-bold tracking-wide text-[#4a5568] transition-all gap-4 w-full">
+                <i class="fas fa-box w-5 text-center md:text-[16px]"></i> <span>Master</span>
+            </button>
+        </nav>
+    </aside>
 
-        <div class="relative z-10 flex-1 flex flex-col p-6 pt-12 overflow-hidden">
-            <h1 class="text-[#155e75] text-lg font-semibold text-center mb-6 tracking-wide shrink-0">Catatan Order</h1>
-
-            <form id="formPembelian" novalidate class="flex flex-col gap-4 shrink-0">
-                
-                <div class="flex flex-col gap-1.5 relative">
-                    <label for="tanggal_real" class="text-[11px] font-medium px-2 text-[#155e75]/80">Tanggal :</label>
-                    <div class="relative w-full h-11">
-                        <input type="date" id="tanggal_real" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                        <input type="text" id="tanggal_display" placeholder="" readonly class="w-full h-11 block glass-panel px-5 pt-[2px] rounded-2xl text-[#155e75] focus:outline-none focus:ring-2 focus:ring-[#38bdf8]/50 transition-all text-[11px] font-medium shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] relative z-0 pointer-events-none">
+    <main class="flex-1 w-full relative z-10 overflow-hidden flex flex-col">
+        
+        <div id="section-input" class="tab-content flex h-full flex-col min-h-0 justify-center overflow-y-auto p-4 md:p-8 w-full max-w-5xl mx-auto">
+            <div class="neu-flat rounded-[30px] p-6 md:p-8 max-w-sm md:max-w-md mx-auto w-full relative z-10">
+                <form id="formPembelian" novalidate class="space-y-5 md:space-y-6">
+                    <div class="relative">
+                        <label class="block text-[10px] md:text-[12px] font-bold text-[#4a5568] mb-2 md:mb-3 ml-4">Tanggal</label>
+                        <div class="relative w-full">
+                            <input type="date" id="tanggal_real" onclick="this.showPicker()" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                            <input type="text" id="tanggal_display" readonly placeholder="Pilih Tanggal" class="w-full p-3.5 md:p-4 text-[11px] md:text-[13px] pointer-events-none z-0">
+                        </div>
                     </div>
-                </div>
-
-                <div class="flex flex-col gap-1.5 relative">
-                    <label for="nama" class="text-[11px] font-medium px-2 text-[#155e75]/80">Nama Barang :</label>
-                    <input type="text" id="nama" placeholder="" autocomplete="off" class="w-full h-11 block glass-panel px-5 rounded-2xl text-[#155e75] focus:outline-none focus:ring-2 focus:ring-[#38bdf8]/50 transition-all text-xs shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]">
-                </div>
-
-                <div class="flex flex-col gap-1.5 relative">
-                    <label for="jumlah" class="text-[11px] font-medium px-2 text-[#155e75]/80">Jumlah :</label>
-                    <input type="number" id="jumlah" min="1" placeholder="" class="w-full h-11 block glass-panel px-5 rounded-2xl text-[#155e75] focus:outline-none focus:ring-2 focus:ring-[#38bdf8]/50 transition-all text-xs shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]">
-                </div>
-
-                <div class="flex flex-col gap-2 mt-2">
-                    <button type="submit" id="btnSubmit" class="w-full h-[40px] shimmer-box px-6 rounded-2xl bg-[#155e75] text-white font-medium hover:bg-[#0e7490] hover:scale-[1.01] transition-all duration-300 text-xs tracking-wide shadow-lg shadow-[#155e75]/20 flex items-center justify-center">
-                        Simpan
+                    <div class="relative">
+                        <label class="block text-[10px] md:text-[12px] font-bold text-[#4a5568] mb-2 md:mb-3 ml-4">Nama Barang</label>
+                        <input type="text" id="nama" placeholder="Ketik nama barang..." autocomplete="off" class="w-full p-3.5 md:p-4 text-[11px] md:text-[13px]">
+                        <div id="autocomplete-list" class="absolute top-[85px] md:top-[95px] left-0 w-full z-50 neu-flat rounded-2xl hidden max-h-40 overflow-y-auto"></div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] md:text-[12px] font-bold text-[#4a5568] mb-2 md:mb-3 ml-4">Jumlah Pcs</label>
+                        <input type="number" id="jumlah" min="1" placeholder="Masukkan jumlah" class="w-full p-3.5 md:p-4 text-[11px] md:text-[13px]">
+                    </div>
+                    <button type="submit" id="btnSubmit" class="w-full py-4 md:py-5 neu-btn text-[#079790] rounded-full mt-6 text-[11px] md:text-[13px] font-extrabold uppercase tracking-widest">
+                        Simpan Order
                     </button>
-                    <button type="button" id="btnBukaOrderList" class="w-full h-[40px] px-6 rounded-2xl bg-white/70 text-[#155e75] font-medium hover:bg-white border border-white transition-all duration-300 text-xs tracking-wide shadow-sm flex items-center justify-center">
-                        Lihat Daftar
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div id="orderListPopup" class="fixed inset-0 z-[140] hidden items-center justify-center bg-[#155e75]/40 backdrop-blur-sm transition-opacity p-4">
-        <div class="bg-[#f4fbff] border border-white/60 p-5 rounded-3xl shadow-2xl w-full max-w-[360px] max-h-[85vh] flex flex-col transform scale-100 transition-transform relative overflow-hidden">
-            
-            <div class="absolute -top-10 -right-10 w-64 h-64 bg-gradient-to-br from-[#38bdf8] to-[#0369a1] rounded-full blur-3xl opacity-30 pointer-events-none"></div>
-            <div class="absolute top-40 -left-20 w-72 h-72 bg-[#7dd3fc] rounded-full blur-3xl opacity-40 pointer-events-none"></div>
-            <div class="absolute -bottom-20 right-0 w-80 h-80 bg-[#bae6fd] rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-
-            <div class="relative z-10 flex flex-col h-full w-full max-h-full">
-                <div class="flex justify-between items-center mb-4 shrink-0">
-                    <h2 class="text-[12px] uppercase tracking-widest text-[#155e75] font-bold">Daftar Order :</h2>
-                    <button type="button" id="btnTutupOrderList" class="text-[#155e75]/60 hover:text-rose-500 bg-white/60 p-1.5 rounded-xl transition-all shadow-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <div id="section-list" class="tab-content hidden h-full flex-col min-h-0">
+            <div class="shrink-0 p-5 md:p-8 pb-0 md:pb-0 w-full max-w-5xl mx-auto">
+                <div class="neu-flat rounded-2xl md:rounded-3xl p-4 md:p-6 flex items-center justify-center relative w-full h-[60px] md:h-[80px]">
+                    <h2 class="text-[12px] md:text-[16px] font-bold text-[#2d3748] text-center">ORDER</h2>
+                    <button type="button" id="btnHapusSemua" class="absolute right-4 md:right-8 w-8 h-8 md:w-11 md:h-11 flex items-center justify-center text-red-500 neu-btn rounded-full transition-all">
+                        <i class="fas fa-trash-alt text-[12px] md:text-[16px]"></i>
                     </button>
                 </div>
-                
-                <button type="button" id="btnHapusSemua" class="mb-4 shrink-0 text-[11px] font-medium text-rose-500 hover:text-rose-600 bg-rose-50/60 hover:bg-rose-100/60 border border-rose-200/50 py-2 px-3 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                    Hapus Semua
-                </button>
+            </div>
+            <div id="daftarCatatan" class="flex-1 overflow-y-auto min-h-0 px-5 md:px-8 pt-4 md:pt-6 pb-5 md:pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto w-full content-start scroll-fade"></div>
+        </div>
 
-                <div id="daftarCatatan" class="flex flex-col gap-2 overflow-y-auto flex-1 pr-1 pb-2 min-h-[200px]">
+        <div id="section-rekap" class="tab-content hidden h-full flex-col min-h-0">
+            <div class="shrink-0 p-5 md:p-8 pb-0 md:pb-0 w-full max-w-5xl mx-auto">
+                <div class="neu-flat rounded-2xl md:rounded-3xl p-4 md:p-6 flex items-center justify-center relative w-full h-[60px] md:h-[80px]">
+                    <h2 class="text-[12px] md:text-[16px] font-bold text-[#2d3748] text-center">TOTAL BAYAR</h2>
+                </div>
+            </div>
+            <div id="containerOrder" class="flex-1 overflow-y-auto min-h-0 px-5 md:px-8 pt-4 md:pt-6 pb-5 md:pb-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto w-full content-start scroll-fade"></div>
+            <div class="shrink-0 p-5 md:p-8 w-full max-w-5xl mx-auto z-20">
+                <div class="neu-flat rounded-2xl md:rounded-3xl p-5 md:p-7 flex justify-between items-center w-full font-black text-[12px] md:text-[16px] text-[#2d3748]">
+                    <span class="neu-text">TOTAL :</span>
+                    <span id="grandTotal" class="text-[#079790] neu-text text-[14px] md:text-[20px]">Rp 0</span>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="customConfirm" class="fixed inset-0 z-[150] hidden items-center justify-center bg-[#155e75]/60 backdrop-blur-md transition-opacity">
-        <div class="bg-[#f4fbff] border border-white/60 p-5 rounded-3xl shadow-2xl w-[85%] max-w-[300px] text-center flex flex-col items-center transform scale-100 transition-transform">
-            <div class="w-12 h-12 bg-rose-100/80 rounded-full flex items-center justify-center mb-3">
-                <svg class="w-6 h-6 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+        <div id="section-barang" class="tab-content hidden h-full flex-col min-h-0">
+            <div class="shrink-0 p-5 md:p-8 pb-0 md:pb-0 w-full max-w-5xl mx-auto">
+                <div class="neu-flat rounded-2xl md:rounded-3xl p-4 md:p-6 flex items-center justify-center relative w-full h-[60px] md:h-[80px]">
+                    <h2 class="text-[12px] md:text-[16px] font-bold text-[#2d3748] text-center">MASTER DATA MEMBER</h2>
+                </div>
             </div>
-            <h3 class="text-[#155e75] font-semibold text-sm mb-1">Hapus Semua Order?</h3>
-            <p class="text-[#155e75]/60 text-[11px] mb-5">Tindakan ini tidak dapat dibatalkan.</p>
-            <div class="flex gap-3 w-full">
-                <button id="btnBatal" class="flex-1 h-[34px] px-4 rounded-xl bg-white/60 text-[#155e75] font-medium text-xs hover:bg-white transition-colors border border-white/50 shadow-sm flex items-center justify-center">Batal</button>
-                <button id="btnKonfirmHapus" class="flex-1 h-[34px] px-4 rounded-xl bg-rose-400 text-white font-medium text-xs hover:bg-rose-500 transition-colors shadow-md shadow-rose-400/30 flex items-center justify-center">Hapus</button>
+            <div id="containerBarang" class="flex-1 overflow-y-auto min-h-0 px-5 md:px-8 pt-4 md:pt-6 pb-5 md:pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto w-full content-start scroll-fade"></div>
+        </div>
+        
+        <div id="toast-container" class="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 z-[200] pointer-events-none opacity-0 translate-y-4 w-full max-w-[260px] md:max-w-[300px] text-center transition-all">
+            <div class="neu-flat text-[#079790] px-5 py-3.5 md:py-4 rounded-full text-[10px] md:text-[12px] font-extrabold flex items-center justify-center gap-3 md:gap-4 tracking-wide">
+                <i id="toast-icon" class="fas fa-info-circle text-[12px] md:text-[14px]"></i>
+                <span id="toast-msg">Notifikasi</span>
+            </div>
+        </div>
+
+    </main>
+
+    <nav class="w-full h-[70px] neu-bg shrink-0 flex md:hidden justify-around items-center px-3 z-[100] relative neu-flat rounded-t-2xl">
+        <button onclick="switchTab('input')" class="tab-btn btn-tab-input flex-1 flex flex-col items-center justify-center py-2 mx-1 rounded-xl text-[9px] font-bold tracking-wide active-tab transition-all gap-1.5 h-12 neu-btn">
+            <i class="fas fa-edit text-[12px]"></i>
+        </button>
+        <button onclick="switchTab('list')" class="tab-btn btn-tab-list flex-1 flex flex-col items-center justify-center py-2 mx-1 rounded-xl text-[9px] font-bold tracking-wide text-[#4a5568] transition-all gap-1.5 h-12 neu-btn">
+            <i class="fas fa-list text-[12px]"></i>
+        </button>
+        <button onclick="switchTab('rekap')" class="tab-btn btn-tab-rekap flex-1 flex flex-col items-center justify-center py-2 mx-1 rounded-xl text-[9px] font-bold tracking-wide text-[#4a5568] transition-all gap-1.5 h-12 neu-btn">
+            <i class="fas fa-chart-pie text-[12px]"></i>
+        </button>
+        <button onclick="switchTab('barang')" class="tab-btn btn-tab-barang flex-1 flex flex-col items-center justify-center py-2 mx-1 rounded-xl text-[9px] font-bold tracking-wide text-[#4a5568] transition-all gap-1.5 h-12 neu-btn">
+            <i class="fas fa-box text-[12px]"></i>
+        </button>
+    </nav>
+
+    <div id="modal-action" class="fixed inset-0 z-[150] hidden items-center justify-center bg-[#e0e5ec]/80 backdrop-blur-sm transition-opacity p-4">
+        <div class="neu-flat p-6 md:p-8 rounded-[30px] w-full max-w-[280px] md:max-w-[340px] relative flex flex-col items-center">
+            <h3 id="modal-action-title" class="text-[#2d3748] font-heading font-bold text-[12px] md:text-[15px] mb-5 mt-1">Edit</h3>
+            <input type="text" id="modal-action-input" class="w-full p-3.5 md:p-4 text-[11px] md:text-[13px] text-center mb-6" placeholder="">
+            <div class="flex gap-4 md:gap-5 w-full">
+                <button onclick="closeModalAction()" class="flex-1 py-3 md:py-4 rounded-full neu-btn text-[#4a5568] font-bold text-[10px] md:text-[12px] uppercase tracking-wider">Batal</button>
+                <button id="btn-modal-action-save" class="flex-1 py-3 md:py-4 rounded-full neu-btn text-[#079790] font-bold text-[10px] md:text-[12px] uppercase tracking-wider">Simpan</button>
             </div>
         </div>
     </div>
 
-    <div id="singleConfirm" class="fixed inset-0 z-[150] hidden items-center justify-center bg-[#155e75]/60 backdrop-blur-md transition-opacity">
-        <div class="bg-[#f4fbff] border border-white/60 p-5 rounded-3xl shadow-2xl w-[85%] max-w-[300px] text-center flex flex-col items-center transform scale-100 transition-transform">
-            <div class="w-12 h-12 bg-rose-100/80 rounded-full flex items-center justify-center mb-3">
-                <svg class="w-6 h-6 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+    <div id="modal-confirm" class="fixed inset-0 z-[150] hidden items-center justify-center bg-[#e0e5ec]/80 backdrop-blur-sm transition-opacity p-4">
+        <div class="neu-flat p-6 md:p-8 rounded-[30px] w-full max-w-[280px] md:max-w-[340px] relative flex flex-col items-center text-center">
+            <div class="w-14 h-14 md:w-16 md:h-16 neu-pressed rounded-full flex items-center justify-center mb-5 md:mb-6">
+                <i class="fas fa-exclamation-triangle text-red-500 text-[14px] md:text-[18px]"></i>
             </div>
-            <h3 class="text-[#155e75] font-semibold text-sm mb-1">Hapus Order Ini?</h3>
-            <p class="text-[#155e75]/60 text-[11px] mb-5">Tindakan ini tidak dapat dibatalkan.</p>
-            <div class="flex gap-3 w-full">
-                <button id="btnBatalSingle" class="flex-1 h-[34px] px-4 rounded-xl bg-white/60 text-[#155e75] font-medium text-xs hover:bg-white transition-colors border border-white/50 shadow-sm flex items-center justify-center">Batal</button>
-                <button id="btnKonfirmHapusSingle" class="flex-1 h-[34px] px-4 rounded-xl bg-rose-400 text-white font-medium text-xs hover:bg-rose-500 transition-colors shadow-md shadow-rose-400/30 flex items-center justify-center">Hapus</button>
+            <h3 id="modal-confirm-title" class="text-[#2d3748] font-heading font-bold text-[12px] md:text-[15px] mb-2">Konfirmasi</h3>
+            <p id="modal-confirm-desc" class="text-[#4a5568] text-[10px] md:text-[12px] font-bold mb-6 md:mb-8">Tindakan ini permanen.</p>
+            <div class="flex gap-4 md:gap-5 w-full">
+                <button onclick="closeModalConfirm()" class="flex-1 py-3 md:py-4 rounded-full neu-btn text-[#4a5568] font-bold text-[10px] md:text-[12px] uppercase tracking-wider">Batal</button>
+                <button id="btn-modal-confirm-yes" class="flex-1 py-3 md:py-4 rounded-full neu-btn text-red-500 font-bold text-[10px] md:text-[12px] uppercase tracking-wider">Hapus</button>
             </div>
         </div>
-    </div>
-
-    <div id="tooltip" class="fixed hidden bg-[#155e75] text-white text-[10px] px-2.5 py-1 rounded-md z-[200] shadow-lg pointer-events-none transition-opacity duration-200">
-        Harap isi bidang ini
     </div>
 
     <script>
-        const gasUrl = "https://script.google.com/macros/s/AKfycbzBnew0hWCsZhRKML7cdCKyqqZbf9ibuj9MqFXn5rJNMFYJrLfgj09uv63IfvPdpRtR/exec";
+        const gasUrl = "https://script.google.com/macros/s/AKfycbzwPJ0rRZtCZTsFy8hVBOe9AitKvpVtU_aNWfLoYGLsSYKNYoT-mbwRahE386sSz2jvow/exec";
+        let globalOrders = [];
+        let globalBarang = [];
+        let actionState = {};
 
-        const form = document.getElementById('formPembelian');
-        const daftarCatatan = document.getElementById('daftarCatatan');
-        const btnHapusSemua = document.getElementById('btnHapusSemua');
-        const tooltip = document.getElementById('tooltip');
-        const tanggalReal = document.getElementById('tanggal_real');
-        const tanggalDisplay = document.getElementById('tanggal_display');
-        const orderListPopup = document.getElementById('orderListPopup');
-        const btnBukaOrderList = document.getElementById('btnBukaOrderList');
-        const btnTutupOrderList = document.getElementById('btnTutupOrderList');
-        const customConfirm = document.getElementById('customConfirm');
-        const btnBatal = document.getElementById('btnBatal');
-        const btnKonfirmHapus = document.getElementById('btnKonfirmHapus');
-        const singleConfirm = document.getElementById('singleConfirm');
-        const btnBatalSingle = document.getElementById('btnBatalSingle');
-        const btnKonfirmHapusSingle = document.getElementById('btnKonfirmHapusSingle');
-        const btnSubmit = document.getElementById('btnSubmit');
+        function showToast(msg, isLoading = false) {
+            const container = document.getElementById('toast-container');
+            const txt = document.getElementById('toast-msg');
+            const icon = document.getElementById('toast-icon');
+            txt.innerText = msg;
+            if (isLoading) {
+                icon.className = "fas fa-circle-notch fa-spin text-[12px] md:text-[14px]";
+                container.classList.remove('opacity-0', 'translate-y-4');
+            } else {
+                icon.className = "fas fa-check-circle text-[12px] md:text-[14px]";
+                container.classList.remove('opacity-0', 'translate-y-4');
+                setTimeout(() => {
+                    container.classList.add('opacity-0', 'translate-y-4');
+                }, 3000);
+            }
+        }
 
-        let itemToDelete = null;
+        function hideToast() {
+            document.getElementById('toast-container').classList.add('opacity-0', 'translate-y-4');
+        }
 
-        async function fetchOrders() {
-            daftarCatatan.innerHTML = '<div class="flex justify-center py-4"><div class="loader"></div></div>';
+        async function fetchAll() {
+            showToast("Mensinkronisasi...", true);
             try {
                 const response = await fetch(gasUrl);
                 const data = await response.json();
-                daftarCatatan.innerHTML = '';
-                
-                if(data.length === 0) {
-                    daftarCatatan.innerHTML = '<div class="text-center text-[#155e75]/60 font-medium text-[11px] py-4">Belum ada order</div>';
-                } else {
-                    data.forEach(item => {
-                        renderCard(item.id, item.tanggal, item.nama, item.jumlah);
-                    });
-                }
-            } catch (error) {
-                daftarCatatan.innerHTML = '<div class="text-center text-rose-500 font-medium text-[11px] py-4">Gagal memuat data</div>';
+                globalOrders = data.orders || [];
+                globalBarang = data.barang || [];
+                renderSemua();
+                showToast("Data tersinkron!");
+            } catch(e) {
+                showToast("Gagal sinkronisasi!");
+                setTimeout(hideToast, 3000);
             }
         }
+
+        function renderSemua() {
+            renderMasterBarang();
+            renderDaftarOrder();
+            renderRekapOrder();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('flex');
+            });
+            
+            const activeSection = document.getElementById('section-' + tabId);
+            activeSection.classList.remove('hidden');
+            activeSection.classList.add('flex');
+            
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active-tab');
+                el.classList.add('text-[#4a5568]');
+            });
+            
+            document.querySelectorAll('.btn-tab-' + tabId).forEach(activeBtn => {
+                activeBtn.classList.add('active-tab');
+                activeBtn.classList.remove('text-[#4a5568]');
+            });
+        }
+
+        const namaInput = document.getElementById('nama');
+        const autocompleteList = document.getElementById('autocomplete-list');
+
+        namaInput.addEventListener('input', function() {
+            const val = this.value.toLowerCase().trim();
+            autocompleteList.innerHTML = '';
+            if (!val) {
+                autocompleteList.classList.add('hidden');
+                return;
+            }
+            const matches = globalBarang.filter(b => b.nama.toLowerCase().includes(val));
+            if (matches.length > 0) {
+                matches.forEach(b => {
+                    const div = document.createElement('div');
+                    div.className = 'px-5 py-3.5 text-[#2d3748] cursor-pointer transition-colors border-b border-[#d1d9e6] last:border-0 capitalize font-bold text-[11px] md:text-[13px]';
+                    div.textContent = b.nama;
+                    div.addEventListener('click', () => {
+                        namaInput.value = b.nama;
+                        autocompleteList.classList.add('hidden');
+                    });
+                    autocompleteList.appendChild(div);
+                });
+                autocompleteList.classList.remove('hidden');
+            } else {
+                autocompleteList.classList.add('hidden');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!namaInput.contains(e.target) && !autocompleteList.contains(e.target)) {
+                autocompleteList.classList.add('hidden');
+            }
+        });
+
+        function renderMasterBarang() {
+            const cb = document.getElementById('containerBarang');
+            cb.innerHTML = '';
+            if(globalBarang.length === 0) {
+                cb.innerHTML = '<div class="col-span-full text-center text-[#4a5568] font-bold text-[11px] md:text-[14px] py-8">Belum ada barang</div>';
+                return;
+            }
+            globalBarang.forEach((b, idx) => {
+                const div = document.createElement('div');
+                div.className = 'neu-flat p-5 md:p-6 flex justify-between items-center rounded-2xl md:rounded-3xl relative z-10 transition-all gap-4';
+                div.innerHTML = `
+                    <div class="flex flex-col overflow-hidden">
+                        <span class="font-heading font-bold text-[12px] md:text-[15px] text-[#2d3748] capitalize truncate">${b.nama}</span>
+                        <span class="text-[10px] md:text-[13px] text-[#079790] font-extrabold tracking-wide mt-1.5 md:mt-2">Rp ${Number(b.harga).toLocaleString('id-ID')}</span>
+                    </div>
+                    <div class="flex items-center gap-2 md:gap-3 shrink-0">
+                        <button onclick="bukaEditNama('${b.nama}')" class="w-7 h-7 md:w-9 md:h-9 neu-btn rounded-full flex items-center justify-center text-[#2d3748]">
+                            <i class="fas fa-edit text-[9px] md:text-[11px]"></i>
+                        </button>
+                        <button onclick="bukaEditHarga('${b.nama}', '${b.harga}')" class="w-7 h-7 md:w-9 md:h-9 neu-btn rounded-full flex items-center justify-center text-[#2d3748]">
+                            <i class="fas fa-tag text-[9px] md:text-[11px]"></i>
+                        </button>
+                        <button onclick="konfirmHapusBarang('${b.nama}')" class="w-7 h-7 md:w-9 md:h-9 neu-btn rounded-full flex items-center justify-center text-red-500">
+                            <i class="fas fa-trash-alt text-[9px] md:text-[11px]"></i>
+                        </button>
+                    </div>
+                `;
+                cb.appendChild(div);
+            });
+        }
+
+        function bukaEditNama(namaLama) {
+            actionState = { type: 'edit_nama', namaLama: namaLama };
+            document.getElementById('modal-action-title').innerText = "Edit Nama";
+            const input = document.getElementById('modal-action-input');
+            input.type = "text";
+            input.value = namaLama;
+            document.getElementById('modal-action').classList.remove('hidden');
+            document.getElementById('modal-action').classList.add('flex');
+        }
+
+        function bukaEditHarga(nama, hargaLama) {
+            actionState = { type: 'edit_harga', nama: nama };
+            document.getElementById('modal-action-title').innerText = "Edit Harga";
+            const input = document.getElementById('modal-action-input');
+            input.type = "number";
+            input.value = hargaLama;
+            document.getElementById('modal-action').classList.remove('hidden');
+            document.getElementById('modal-action').classList.add('flex');
+        }
+
+        function closeModalAction() {
+            document.getElementById('modal-action').classList.add('hidden');
+            document.getElementById('modal-action').classList.remove('flex');
+            actionState = {};
+        }
+
+        document.getElementById('btn-modal-action-save').addEventListener('click', function() {
+            const val = document.getElementById('modal-action-input').value;
+            if(!val) return;
+            const btn = this;
+            btn.classList.add('btn-processing');
+            let payload = {};
+            if(actionState.type === 'edit_nama') {
+                payload = { action: 'update_nama_barang', nama_lama: actionState.namaLama, nama_baru: val };
+            } else if (actionState.type === 'edit_harga') {
+                payload = { action: 'update_harga', nama: actionState.nama };
+            }
+            fetch(gasUrl, {
+                method: 'POST',
+                body: JSON.stringify(payload),
+                headers: { 'Content-Type': 'text/plain' }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.status === 'success') {
+                    closeModalAction();
+                    fetchAll();
+                }
+                btn.classList.remove('btn-processing');
+            }).catch(() => btn.classList.remove('btn-processing'));
+        });
+
+        function konfirmHapusBarang(nama) {
+            actionState = { type: 'hapus_barang', nama: nama };
+            document.getElementById('modal-confirm-title').innerText = "Hapus Barang";
+            document.getElementById('modal-confirm-desc').innerText = `Hapus "${nama}"?`;
+            document.getElementById('modal-confirm').classList.remove('hidden');
+            document.getElementById('modal-confirm').classList.add('flex');
+        }
+
+        function renderRekapOrder() {
+            const grouped = {};
+            globalOrders.forEach(o => {
+                const n = o.nama.toLowerCase().trim();
+                if(!grouped[n]) grouped[n] = { nama: o.nama, jumlah: 0, harga: 0 };
+                grouped[n].jumlah += Number(o.jumlah);
+            });
+            globalBarang.forEach(b => {
+                const n = b.nama.toLowerCase().trim();
+                if(grouped[n]) {
+                    grouped[n].harga = Number(b.harga) || 0;
+                }
+            });
+            let totalPengeluaran = 0;
+            const container = document.getElementById('containerOrder');
+            container.innerHTML = '';
+            if(Object.keys(grouped).length === 0) {
+                container.innerHTML = '<div class="col-span-full text-center text-[#4a5568] font-bold text-[11px] md:text-[14px] py-8">Belum ada order</div>';
+            }
+            Object.values(grouped).forEach(g => {
+                const subtotal = g.jumlah * g.harga;
+                totalPengeluaran += subtotal;
+                container.innerHTML += `
+                <div class="neu-flat p-5 md:p-6 flex justify-between items-center rounded-2xl md:rounded-3xl z-10 relative">
+                    <div class="flex flex-col gap-2 md:gap-3">
+                        <span class="text-[#2d3748] font-heading font-bold text-[11px] md:text-[14px] uppercase">${g.nama}</span>
+                        <span class="text-[#4a5568] text-[9px] md:text-[11px] font-extrabold neu-pressed px-3 py-1.5 md:px-4 md:py-2 rounded-full inline-block w-fit">${g.jumlah} Pcs × Rp ${g.harga.toLocaleString('id-ID')}</span>
+                    </div>
+                    <div class="text-[#079790] font-extrabold text-[11px] md:text-[14px] neu-pressed px-4 py-2 md:px-5 md:py-3 rounded-2xl md:rounded-3xl text-right">
+                        Rp ${subtotal.toLocaleString('id-ID')}
+                    </div>
+                </div>`;
+            });
+            document.getElementById('grandTotal').innerText = `Rp ${totalPengeluaran.toLocaleString('id-ID')}`;
+        }
+
+        function renderDaftarOrder() {
+            const daftarCatatan = document.getElementById('daftarCatatan');
+            daftarCatatan.innerHTML = '';
+            if(globalOrders.length === 0) {
+                daftarCatatan.innerHTML = '<div class="col-span-full text-center text-[#4a5568] font-bold text-[11px] md:text-[14px] py-8">Belum ada order</div>';
+            } else {
+                [...globalOrders].reverse().forEach(item => {
+                    const dateObj = new Date(item.tanggal);
+                    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                    const formattedDate = dateObj.toLocaleDateString('id-ID', options);
+                    const card = document.createElement('div');
+                    card.className = 'neu-flat px-5 py-4 md:px-6 md:py-5 flex justify-between items-center rounded-2xl md:rounded-3xl z-10 relative';
+                    card.innerHTML = `
+                        <div class="flex flex-col">
+                            <span class="font-heading font-bold text-[12px] md:text-[15px] text-[#2d3748] capitalize mb-1.5 md:mb-2">${item.nama}</span>
+                            <span class="text-[9px] md:text-[11px] text-[#4a5568] uppercase tracking-wider font-bold"><i class="fas fa-calendar-alt mr-1"></i> ${formattedDate}</span>
+                        </div>
+                        <div class="flex items-center gap-3 md:gap-4 shrink-0">
+                            <div class="neu-pressed px-3 py-2 md:px-4 md:py-2.5 rounded-xl text-[9px] md:text-[11px] font-extrabold text-[#079790]">
+                                ${item.jumlah} PCS
+                            </div>
+                            <button onclick="konfirmHapusOrder('${item.id}')" class="w-7 h-7 md:w-9 md:h-9 flex items-center justify-center text-red-500 neu-btn rounded-full">
+                                <i class="fas fa-trash-alt text-[9px] md:text-[11px]"></i>
+                            </button>
+                        </div>
+                    `;
+                    daftarCatatan.appendChild(card);
+                });
+            }
+        }
+
+        const tanggalReal = document.getElementById('tanggal_real');
+        const tanggalDisplay = document.getElementById('tanggal_display');
 
         tanggalReal.addEventListener('change', function() {
             if(this.value) {
@@ -240,188 +554,88 @@ input[type=number] {
             }
         });
 
-        btnBukaOrderList.addEventListener('click', () => {
-            orderListPopup.classList.remove('hidden');
-            orderListPopup.classList.add('flex');
-            fetchOrders();
-        });
-
-        btnTutupOrderList.addEventListener('click', () => {
-            orderListPopup.classList.add('hidden');
-            orderListPopup.classList.remove('flex');
-        });
-
-        function showTooltip(el) {
-            const rect = el.getBoundingClientRect();
-            tooltip.style.top = (rect.top - 28) + 'px';
-            tooltip.style.left = rect.left + 'px';
-            tooltip.classList.remove('hidden');
-            setTimeout(() => {
-                tooltip.classList.add('hidden');
-            }, 2000);
-        }
-
-        function renderCard(id, tanggal, nama, jumlah) {
-            const dateObj = new Date(tanggal);
-            const options = { day: 'numeric', month: 'short', year: 'numeric' };
-            const formattedDate = dateObj.toLocaleDateString('id-ID', options);
-
-            const card = document.createElement('div');
-            card.className = 'glass-panel px-3 py-2 rounded-[14px] flex justify-between items-center hover:bg-white/60 transition-colors duration-300 shadow-sm shimmer-box shrink-0';
-            card.setAttribute('data-id', id);
-
-            const leftDiv = document.createElement('div');
-            leftDiv.className = 'flex flex-col z-20';
-
-            const namaSpan = document.createElement('span');
-            namaSpan.className = 'font-semibold text-[12px] text-[#155e75] capitalize';
-            namaSpan.textContent = nama;
-
-            const tanggalSpan = document.createElement('span');
-            tanggalSpan.className = 'text-[8px] text-[#155e75]/60 mt-0.5 uppercase tracking-wider font-medium';
-            tanggalSpan.textContent = formattedDate;
-
-            leftDiv.appendChild(namaSpan);
-            leftDiv.appendChild(tanggalSpan);
-
-            const rightContainer = document.createElement('div');
-            rightContainer.className = 'flex items-center gap-2 z-20 shrink-0';
-
-            const rightDiv = document.createElement('div');
-            rightDiv.className = 'bg-gradient-to-br from-[#38bdf8] to-[#0369a1] px-2 py-0.5 rounded-lg text-[9px] font-semibold shadow-sm text-white';
-            rightDiv.textContent = jumlah + ' PCS';
-
-            const btnDelete = document.createElement('button');
-            btnDelete.type = 'button';
-            btnDelete.className = 'text-rose-400 hover:text-rose-600 bg-white/60 p-1 rounded-md transition-colors shadow-sm';
-            btnDelete.innerHTML = '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>';
-            
-            btnDelete.addEventListener('click', function() {
-                itemToDelete = card;
-                singleConfirm.classList.remove('hidden');
-                singleConfirm.classList.add('flex');
-            });
-
-            rightContainer.appendChild(rightDiv);
-            rightContainer.appendChild(btnDelete);
-            card.appendChild(leftDiv);
-            card.appendChild(rightContainer);
-            daftarCatatan.prepend(card);
-        }
-
-        form.addEventListener('submit', function(e) {
+        document.getElementById('formPembelian').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const namaInput = document.getElementById('nama');
+            const namaInputEl = document.getElementById('nama');
             const jumlahInput = document.getElementById('jumlah');
+            const btnSubmit = document.getElementById('btnSubmit');
 
-            if (!tanggalReal.value) {
-                showTooltip(tanggalDisplay);
-                tanggalReal.focus();
+            if (!tanggalReal.value || !namaInputEl.value || !jumlahInput.value) {
+                showToast("Harap isi semua!");
+                setTimeout(hideToast, 2000);
                 return;
             }
-            if (!namaInput.value) {
-                showTooltip(namaInput);
-                namaInput.focus();
-                return;
-            }
-            if (!jumlahInput.value) {
-                showTooltip(jumlahInput);
-                jumlahInput.focus();
-                return;
-            }
-
-            const tanggal = tanggalReal.value;
-            const nama = namaInput.value;
-            const jumlah = jumlahInput.value;
-            
-            btnSubmit.innerHTML = '<div class="loader-btn"></div>';
-
+            btnSubmit.classList.add('btn-processing');
             fetch(gasUrl, {
                 method: 'POST',
-                body: JSON.stringify({ action: 'create', tanggal: tanggal, nama: nama, jumlah: jumlah }),
+                body: JSON.stringify({ action: 'create', tanggal: tanggalReal.value, nama: namaInputEl.value, jumlah: jumlahInput.value }),
                 headers: { 'Content-Type': 'text/plain' }
             })
             .then(res => res.json())
             .then(data => {
                 if(data.status === 'success') {
-                    if (daftarCatatan.innerHTML.includes('Belum ada order')) {
-                        daftarCatatan.innerHTML = '';
-                    }
-                    renderCard(data.id, tanggal, nama, jumlah);
-                    form.reset();
+                    this.reset();
                     tanggalDisplay.value = '';
+                    fetchAll();
                 }
-                btnSubmit.innerHTML = 'Simpan';
+                btnSubmit.classList.remove('btn-processing');
             })
             .catch(err => {
-                btnSubmit.innerHTML = 'Simpan';
+                btnSubmit.classList.remove('btn-processing');
             });
         });
 
-        btnHapusSemua.addEventListener('click', function() {
-            if (daftarCatatan.children.length > 0 && !daftarCatatan.innerHTML.includes('Belum ada order')) {
-                customConfirm.classList.remove('hidden');
-                customConfirm.classList.add('flex');
+        function konfirmHapusOrder(id) {
+            actionState = { type: 'hapus_order', id: id };
+            document.getElementById('modal-confirm-title').innerText = "Hapus Order";
+            document.getElementById('modal-confirm-desc').innerText = "Tindakan permanen.";
+            document.getElementById('modal-confirm').classList.remove('hidden');
+            document.getElementById('modal-confirm').classList.add('flex');
+        }
+
+        document.getElementById('btnHapusSemua').addEventListener('click', function() {
+            if (globalOrders.length > 0) {
+                actionState = { type: 'hapus_semua' };
+                document.getElementById('modal-confirm-title').innerText = "Hapus Semua?";
+                document.getElementById('modal-confirm-desc').innerText = "Seluruh order dihapus.";
+                document.getElementById('modal-confirm').classList.remove('hidden');
+                document.getElementById('modal-confirm').classList.add('flex');
             }
         });
 
-        btnBatal.addEventListener('click', function() {
-            customConfirm.classList.add('hidden');
-            customConfirm.classList.remove('flex');
-        });
+        function closeModalConfirm() {
+            document.getElementById('modal-confirm').classList.add('hidden');
+            document.getElementById('modal-confirm').classList.remove('flex');
+            actionState = {};
+        }
 
-        btnKonfirmHapus.addEventListener('click', function() {
-            btnKonfirmHapus.innerHTML = '<div class="loader-btn"></div>';
+        document.getElementById('btn-modal-confirm-yes').addEventListener('click', function() {
+            const btn = this;
+            btn.classList.add('btn-processing');
+            let payload = {};
+            if(actionState.type === 'hapus_semua') {
+                payload = { action: 'deleteAll' };
+            } else if (actionState.type === 'hapus_order') {
+                payload = { action: 'delete', id: actionState.id };
+            } else if (actionState.type === 'hapus_barang') {
+                payload = { action: 'delete_barang', nama: actionState.nama };
+            }
             fetch(gasUrl, {
                 method: 'POST',
-                body: JSON.stringify({ action: 'deleteAll' }),
+                body: JSON.stringify(payload),
                 headers: { 'Content-Type': 'text/plain' }
             })
             .then(res => res.json())
             .then(data => {
                 if(data.status === 'success') {
-                    daftarCatatan.innerHTML = '<div class="text-center text-[#155e75]/60 font-medium text-[11px] py-4">Belum ada order</div>';
-                    customConfirm.classList.add('hidden');
-                    customConfirm.classList.remove('flex');
-                    orderListPopup.classList.add('hidden');
-                    orderListPopup.classList.remove('flex');
+                    fetchAll();
+                    closeModalConfirm();
                 }
-                btnKonfirmHapus.innerHTML = 'Hapus';
+                btn.classList.remove('btn-processing');
             });
         });
 
-        btnBatalSingle.addEventListener('click', function() {
-            itemToDelete = null;
-            singleConfirm.classList.add('hidden');
-            singleConfirm.classList.remove('flex');
-        });
-
-        btnKonfirmHapusSingle.addEventListener('click', function() {
-            if (itemToDelete) {
-                const id = itemToDelete.getAttribute('data-id');
-                btnKonfirmHapusSingle.innerHTML = '<div class="loader-btn"></div>';
-                fetch(gasUrl, {
-                    method: 'POST',
-                    body: JSON.stringify({ action: 'delete', id: id }),
-                    headers: { 'Content-Type': 'text/plain' }
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.status === 'success') {
-                        itemToDelete.remove();
-                        itemToDelete = null;
-                        singleConfirm.classList.add('hidden');
-                        singleConfirm.classList.remove('flex');
-                        
-                        if (daftarCatatan.children.length === 0) {
-                             daftarCatatan.innerHTML = '<div class="text-center text-[#155e75]/60 font-medium text-[11px] py-4">Belum ada order</div>';
-                        }
-                    }
-                    btnKonfirmHapusSingle.innerHTML = 'Hapus';
-                });
-            }
-        });
+        document.addEventListener('DOMContentLoaded', fetchAll);
     </script>
 </body>
 </html>
